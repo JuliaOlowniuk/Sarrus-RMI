@@ -4,17 +4,14 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class Server extends ServerImpl {
 
-    public Server(Registry registry) {
-        super(registry);
-    }
 
     public static void main(String[] args) {
         try {
             // Utwórz rejestr RMI
-            Registry registry = LocateRegistry.createRegistry(1099);
+            Registry registry = LocateRegistry.getRegistry();
 
             // Utwórz instancję Server i przekaż do niej rejestr
-            Server server = new Server(registry);
+            ServerImpl server =  new ServerImpl();
             iServer stub = (iServer) UnicastRemoteObject.exportObject(server, 0);
 
             // Zarejestruj stub w rejestrze

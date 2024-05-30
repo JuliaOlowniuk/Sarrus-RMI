@@ -9,16 +9,15 @@ public class Agent extends AgentImpl {
     private int agentNumber;
 
     public Agent(int agentNumber) throws RemoteException {
-        super();
+        super(agentNumber);
         this.agentNumber = agentNumber;
     }
-
     public static void main(String[] args) {
         // Kod inicjalizacyjny, np. uruchomienie agenta
         try {
-            AgentImpl agent1 = new Agent(1);
-            AgentImpl agent2 = new Agent(2);
-            AgentImpl agent3 = new Agent(3);
+            AgentImpl agent1 = new AgentImpl(1);
+            AgentImpl agent2 = new AgentImpl(2);
+            AgentImpl agent3 = new AgentImpl(3);
 
             iAgent stub1 = (iAgent) UnicastRemoteObject.exportObject(agent1, 0);
             iAgent stub2 = (iAgent) UnicastRemoteObject.exportObject(agent2, 0);

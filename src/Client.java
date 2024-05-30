@@ -9,8 +9,8 @@ public class Client {
             iServer stub = (iServer) registry.lookup("Server");
 
             // przykladowa macierz
-            Double[][] mxValues = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
-            Matrix mx = new Matrix(mxValues);
+            Double[][] mx = {{1.0, 2.0, 3.0}, {1.0, 4.0, 9.0}, {1.0, 8.0, 27.0}};
+
 
             Double determinant = stub.computeDeterminant(mx);
             System.out.println("Determinant: " + determinant);
