@@ -9,7 +9,7 @@ public class ServerImpl implements iServer {
 
     @Override
     public Double computeDeterminant(Double[][] mx) throws RemoteException {
-        if (mx.length != 3 || mx [0].length != 3) {
+        if (mx.length != 3 || mx[0].length != 3) {
             System.err.println("Matrix must be a 3x3 matrix.");
             return null;
         }
@@ -25,9 +25,21 @@ public class ServerImpl implements iServer {
             double firstSum, secondSum;
             double determinant;
 
-            firstDiag = stub1.pierwszaPrzekatna(mx);
-            secondDiag = stub2.pierwszaPrzekatna(mx);
-            thirdDiag = stub3.pierwszaPrzekatna(mx);
+            Watek t1 = new Watek(stub1, 1, mx);
+            Watek t2 = new Watek(stub2, 1, mx);
+            Watek t3 = new Watek(stub3, 1, mx);
+
+            t1.start();
+            t2.start();
+            t3.start();
+
+            t1.join();
+            t2.join();
+            t3.join();
+
+            firstDiag = t1.getWynik();
+            secondDiag = t2.getWynik();
+            thirdDiag = t3.getWynik();
 
             System.out.println("Pierwsze przekatne " + firstDiag + " " + secondDiag + " " + thirdDiag);
 
@@ -35,9 +47,21 @@ public class ServerImpl implements iServer {
 
             System.out.println("Suma = " + firstSum);
 
-            firstDiag = stub1.drugaPrzekatna(mx);
-            secondDiag = stub2.drugaPrzekatna(mx);
-            thirdDiag = stub3.drugaPrzekatna(mx);
+            t1 = new Watek(stub1, 2, mx);
+            t2 = new Watek(stub2, 2, mx);
+            t3 = new Watek(stub3, 2, mx);
+
+            t1.start();
+            t2.start();
+            t3.start();
+
+            t1.join();
+            t2.join();
+            t3.join();
+
+            firstDiag = t1.getWynik();
+            secondDiag = t2.getWynik();
+            thirdDiag = t3.getWynik();
 
             System.out.println("Drugie przekatne " + firstDiag + " " + secondDiag + " " + thirdDiag);
 
